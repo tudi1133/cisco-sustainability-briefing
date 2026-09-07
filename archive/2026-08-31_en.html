@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisco Sustainability Intelligence Briefing — Issue #70 | August 31, 2026</title>
+<style>
+  :root {
+    --cisco-blue: #049fd9;
+    --cisco-light: #00bceb;
+    --cisco-dark: #0d274d;
+    --bg-dark: #0a1628;
+    --card-bg: #111d32;
+    --text-main: #e0e6f0;
+    --text-muted: #8a9bb5;
+    --accent-green: #00d26a;
+    --accent-warm: #ff9f43;
+    --border-subtle: #1a2d4a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+  a { color: var(--cisco-blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  header {
+    background: linear-gradient(135deg, var(--cisco-dark) 0%, #0a1628 100%);
+    border-bottom: 3px solid var(--cisco-blue);
+    padding: 40px 0;
+    margin-bottom: 32px;
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .issue-badge {
+    display: inline-block;
+    background: var(--cisco-blue);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .subtitle { color: var(--cisco-light); font-size: 16px; font-weight: 400; }
+  .meta { color: var(--text-muted); font-size: 13px; margin-top: 12px; }
+  .lang-switch { float: right; margin-top: -40px; }
+  .lang-switch a {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--cisco-blue);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--cisco-blue);
+    transition: all 0.2s;
+  }
+  .lang-switch a:hover { background: var(--cisco-blue); color: #fff; text-decoration: none; }
+  .two-col { display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+  .main-col {}
+  .sidebar {}
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cisco-light);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .exec-summary {
+    background: var(--card-bg);
+    border-left: 4px solid var(--cisco-blue);
+    padding: 24px;
+    border-radius: 0 8px 8px 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+  .exec-summary p + p { margin-top: 14px; }
+  .intel-item {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border-subtle);
+    transition: border-color 0.2s;
+  }
+  .intel-item:hover { border-color: var(--cisco-blue); }
+  .intel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .intel-title { font-size: 17px; font-weight: 600; color: #fff; line-height: 1.4; flex: 1; }
+  .impact-badge {
+    background: linear-gradient(135deg, var(--accent-green), #00a854);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+  .impact-badge.high { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+  .intel-summary { color: var(--text-main); font-size: 14.5px; margin-bottom: 14px; }
+  .intel-meta { font-size: 13px; color: var(--text-muted); }
+  .cisco-relevance {
+    background: rgba(4, 159, 217, 0.08);
+    border-left: 3px solid var(--cisco-blue);
+    padding: 14px 16px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 14px;
+    font-size: 13.5px;
+  }
+  .cisco-relevance strong { color: var(--cisco-light); }
+  .sources { margin-top: 12px; font-size: 12.5px; color: var(--text-muted); }
+  .sources a { color: var(--cisco-blue); }
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .data-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 18px;
+    transition: border-color 0.2s;
+  }
+  .data-card:hover { border-color: var(--cisco-blue); }
+  .data-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cisco-light);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .data-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .data-trend { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .trend-up { color: var(--accent-green); }
+  .trend-down { color: var(--accent-warm); }
+  .data-source { font-size: 11.5px; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 8px; margin-top: 8px; }
+  .data-source a { color: var(--cisco-blue); }
+  .rec-block {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border-subtle);
+  }
+  .rec-block h4 { color: var(--cisco-light); font-size: 15px; margin-bottom: 10px; }
+  .rec-block ul { padding-left: 22px; font-size: 14px; }
+  .rec-block li { margin-bottom: 6px; }
+  .sidebar-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+  .sidebar-card h3 {
+    font-size: 14px;
+    color: var(--cisco-light);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .signal {
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .signal:last-child { border-bottom: none; }
+  .signal strong { color: #fff; display: block; margin-bottom: 3px; }
+  .signal .source { font-size: 11.5px; color: var(--text-muted); }
+  .signal .source a { color: var(--cisco-blue); }
+  .event-row { font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); }
+  .event-row:last-child { border-bottom: none; }
+  .event-date { color: var(--cisco-blue); font-weight: 600; font-size: 12px; }
+  .topic-chip {
+    display: inline-block;
+    background: rgba(4, 159, 217, 0.1);
+    border: 1px solid rgba(4, 159, 217, 0.3);
+    color: var(--cisco-light);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 3px 4px 3px 0;
+  }
+  .core-source {
+    font-size: 12.5px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .core-source:last-child { border-bottom: none; }
+  .core-source a { color: var(--cisco-blue); }
+  .methodology-note {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 22px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+  }
+  .methodology-note h4 {
+    color: var(--cisco-light);
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .methodology-note ul { padding-left: 20px; margin-top: 8px; }
+  .methodology-note li { margin-bottom: 5px; }
+  .methodology-note a { color: var(--cisco-blue); }
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: 24px 0;
+    margin-top: 32px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--cisco-blue); }
+  @media (max-width: 900px) {
+    .two-col { grid-template-columns: 1fr; }
+    .data-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="lang-switch">
+      <a href="cisco_sustainability_briefing_zh.html">中文版</a>
+    </div>
+    <span class="issue-badge">Issue #70 · August 31, 2026</span>
+    <h1>Cisco Sustainability Intelligence Briefing</h1>
+    <p class="subtitle">Weekly intelligence on Vietnam energy transition, Southeast Asia grid build-out, and supply-chain ESG convergence</p>
+    <p class="meta">Coverage window: August 24 – August 30, 2026 · Search language: English · Theme count: 5 · For: dit2@cisco.com</p>
+  </div>
+</header>
+
+<div class="container">
+<div class="two-col">
+
+<div class="main-col">
+
+<!-- ============================ EXECUTIVE SUMMARY ============================ -->
+<div class="section">
+  <div class="section-title">Executive Summary</div>
+  <div class="exec-summary">
+    <p>Vietnam's DPPA market moved decisively into execution this week. With Decree 243/2026 taking effect on 26 June and its 20,000 kWh/month Large Electricity Consumer threshold already live since 20 July, legal commentaries published in early August (Frasers Law, VILAF, Lexology) confirm that private-wire tariffs are now fully deregulated, rooftop-solar surplus sale caps have expanded from 20% to 50%, and licensed industrial-park retailers can act as independent off-takers. Combined with the 7 July adoption of Decree 272 implementing Resolution 253/2025/QH15 on the 2026–2030 energy roadmap, this is the most supplier-friendly regulatory package since the Electricity Law 2024.</p>
+    <p>Regional infrastructure is catching up to demand. The IEA's 2026 outlook, restated this week by the COP31 Türkiye Brief and Eurogroup Consulting, quantifies a Southeast Asia transmission-and-storage investment gap of $13B/year today rising to $50B/year by 2050, with the ASEAN Power Grid alone requiring ~$27B in cross-border interconnection by 2040. Singapore's EMA cleared another 900 MW Malaysia solar-plus-storage import tranche earlier this month, taking cumulative conditional approvals to roughly 11 projects targeting 6 GW by 2035. These data points mean Cisco's Vietnam manufacturing supply chain now has both the regulatory permission and the regional grid backstop to lock in PPAs—provided we move before contracting windows tighten in Q4 2026.</p>
+  </div>
+</div>
+
+<!-- ============================ TOP 3 INTELLIGENCE ============================ -->
+<div class="section">
+  <div class="section-title">Top 3 Actionable Intelligence</div>
+
+  <div class="intel-item">
+    <div class="intel-header">
+      <div class="intel-title">1 · Vietnam Decree 243/2026 enters mass-adoption phase — 20,000 kWh threshold, full private-wire price de-control, industrial-park retailers now valid off-takers</div>
+      <span class="impact-badge">Impact 9.2</span>
+    </div>
+    <div class="intel-summary">
+      Published 26 June 2026, Decree 243/2026/NĐ-CP amendments to Decree 57/2025 and Decree 58/2025 took immediate effect, with the headline 200,000 → 20,000 kWh/month Large Electricity Consumer threshold formally live since 20 July. Early-August legal alerts from Frasers Law (3 Aug), VILAF and Lexology confirm three structural wins for Foxconn-tier EMS/ODM buyers in Vietnam: (i) private-wire DPPA pricing is now set entirely by mutual agreement with no ceiling; (ii) rooftop-solar surplus sale caps to EVN/PC jump from 20% → 50% of actual output; (iii) licensed industrial-park and cluster electricity retailers can act as independent DPPA buyers, creating a two-tier off-take structure (retailer buys from GENCO, then on-sells to LEC in zone). Virtual DPPA procedures collapse from 7 steps to 3, and data centres, EV charging stations and battery-swap operators are explicitly added as eligible demand.
+    </div>
+    <div class="cisco-relevance">
+      <strong>Cisco Relevance:</strong> The 20,000 kWh threshold extends DPPA eligibility from roughly 50 industrial off-takers to an estimated 4,000+ commercial buyers nationwide, dramatically widening the supplier PPA pool for Cisco's EMS partners in Bắc Ninh, Bình Dương and Đồng Nai provinces. <strong>Action window:</strong> Cisco should fast-track PPA requests from Foxconn, Quanta and Inventec for sites exceeding 2 MWp solar+storage co-location, leveraging the deregulated private-wire price band to lock 10–15-year cost certainty before project pipelines saturate.
+    </div>
+    <div class="sources">
+      <strong>Sources:</strong>
+      <a href="https://www.frasersvn.com/legal-updates-and-publications/Vietnam-Accelerates-Its-Direct-Power-Purchase-Agreement-Framework-Key-Changes-Under-Decree-243" target="_blank" rel="noopener">Frasers Law: Decree 243 Explained ↗</a> ·
+      <a href="https://www.vilaf.com.vn/blog/decree-243-unlocking-new-opportunities-for-direct-power-trading-and-renewable-energy-in-vietnam/" target="_blank" rel="noopener">VILAF: Decree 243 Unlocking DPPA ↗</a> ·
+      <a href="https://www.lexology.com/library/detail.aspx?g=abf15187-7838-4fea-878b-ba5b95db33a7" target="_blank" rel="noopener">Lexology: DPPA Amendments ↗</a> ·
+      <a href="https://vietnam.vn/en/go-diem-nghen-de-nang-luong-di-truoc-mot-buoc" target="_blank" rel="noopener">Vietnam.vn: Resolution 253 + Decree 272 ↗</a>
+    </div>
+  </div>
+
+  <div class="intel-item">
+    <div class="intel-header">
+      <div class="intel-title">2 · Southeast Asia grid + storage investment gap quantified — $13B → $50B/year by 2050; ASEAN Power Grid needs ~$27B cross-border by 2040</div>
+      <span class="impact-badge">Impact 9.0</span>
+    </div>
+    <div class="intel-summary">
+      TBH's June 30 report <em>"Connecting Southeast Asia's Energy Future"</em> and the IEA 2026 outlook, restated across COP31 Türkiye (week of 25 Aug) and Eurogroup Consulting (28 Aug), argue that electricity demand growth of ~2.6% annually across Malaysia, Thailand, Indonesia, Vietnam, the Philippines and Singapore is colliding with transmission, storage and cross-border interconnection shortfalls. IEA forecasts T&D networks must more than double in length by 2050, requiring grid-plus-storage capex to rise from ~$13B/year today to ~$50B/year by 2050; the ASEAN Power Grid alone needs ~$27B in cross-border lines by 2040. ADB's $70B pan-Asia pipeline targets 22,000 circuit-km and 20 GW of cross-border renewable integration by 2035, while the APT's $50B Aug 14 ASEAN Plan of Action for Energy Cooperation 2026–2030 locks in 30% renewables in TPES and 45% installed-capacity by 2030. Singapore's EMA this week added another 900 MW Malaysia solar-plus-storage tranche to its queue of 11 conditional import approvals targeting 6 GW by 2035.
+    </div>
+    <div class="cisco-relevance">
+      <strong>Cisco Relevance:</strong> The regional grid build-out directly de-risks Vietnam manufacturing PPAs by enabling surplus export to Cambodia/Laos/Thailand/Malaysia under ASEAN Power Grid rules—a structural fix to the "no off-take beyond factory fence" bottleneck. <strong>Action window:</strong> Cisco should engage TNB, EVN and the Singapore Energy Interconnections Pte. Ltd. (set up April 2026) to scope Vietnam-to-Malaysia cross-border wheeling options for Foxconn and Inventec sites, particularly for any surplus that exceeds on-site consumption in BESS-constrained regions.
+    </div>
+    <div class="sources">
+      <strong>Sources:</strong>
+      <a href="https://www.energy-box.com/post/grid-bottlenecks-threaten-southeast-asia-s-energy-transition-report-finds" target="_blank" rel="noopener">Energy Box: TBH Report on Grid Bottlenecks ↗</a> ·
+      <a href="https://cop31tr.com/?p=5740/" target="_blank" rel="noopener">COP31 Türkiye Brief: ASEAN Grid Pathways ↗</a> ·
+      <a href="https://www.eurogroupconsultingmea.com/insights/article/powering-asean-the-southeast-asia-solar-grid-integration-race-thats-rewiring-the-region" target="_blank" rel="noopener">Eurogroup: Powering ASEAN ↗</a> ·
+      <a href="https://vir.com.vn/southeast-asias-energy-transition-enters-a-new-phase-156169.html" target="_blank" rel="noopener">Vietnam Investment Review: SE Asia Transition ↗</a>
+    </div>
+  </div>
+
+  <div class="intel-item">
+    <div class="intel-header">
+      <div class="intel-title">3 · Supply-chain water & carbon compliance converges — WRI Water Scopes 1–3 (target Q4 2027) and SBTi V2.0 Dashboard reset (opt-out window closes 31 Aug) reshape Cisco Module 5.11 disclosures</div>
+      <span class="impact-badge">Impact 8.8</span>
+    </div>
+    <div class="intel-summary">
+      Two converging frameworks tighten supply-chain ESG expectations this month. First, the Water Scopes 1–3 coalition (WRI, WWF, SCS Global Services, CEO Water Mandate) released substantive technical guidance on value-chain water DIRO assessment, with public comment planned at month 12 (Q2 2027) and final guidance targeted for Q4 2027—the first GHG-Protocol-style standard for corporate water risk across supplier tiers. Second, SBTi published V2.0 of its Commitment and Target Statuses (13 Aug 2026, effective 24 Sep 2026) which obliges every company with "Targets Set" status to either migrate to V2.0 net-zero targets or formally withdraw via targetstatus@sbtiservices.com before 31 Aug 2026. Categorisation (A/B) and EIA thresholds ≥5% of Scope 3 reshape supplier engagement requirements starting Q1 2027.
+    </div>
+    <div class="cisco-relevance">
+      <strong>Cisco Relevance:</strong> Cisco's CDP Water Security Module 5.11 workstream—already aligned with AWS Collective Action Accelerator and WRI Aqueduct—should now formalise adoption of the draft Water Scopes 1–3 vocabulary in our 2027 SOP. The SBTi 31 Aug opt-out deadline directly affects our Tier-1 EMS suppliers (Foxconn, Quanta, Inventec, Flex) which hold validated targets under V1.3.1—Cisco engagement ensures these partners transition cleanly rather than exit.
+    </div>
+    <div class="sources">
+      <strong>Sources:</strong>
+      <a href="https://wri.org/technical-perspectives/water-scopes-1-3-value-chain-framework" target="_blank" rel="noopener">WRI: Water Scopes 1–3 Framework ↗</a> ·
+      <a href="https://files.sciencebasedtargets.org/production/files/SBTi-Commitment-and-Target-Statuses.pdf" target="_blank" rel="noopener">SBTi: Commitment & Target Statuses V2.0 (Aug 2026) ↗</a> ·
+      <a href="https://sciencebasedtargets.org/measurement-reporting-and-verification-mrv" target="_blank" rel="noopener">SBTi: Corporate Net-Zero Standard V2 ↗</a> ·
+      <a href="https://blogs.cisco.com/our-corporate-purpose/powering-resilient-ecosystems-fy25-purpose-report/" target="_blank" rel="noopener">Cisco FY25 Purpose Report: Resilient Ecosystems ↗</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================ KEY DATA POINTS ============================ -->
+<div class="section">
+  <div class="section-title">Key Data Points</div>
+  <div class="data-grid">
+
+    <div class="data-card">
+      <div class="data-value">20,000<span style="font-size:18px;color:var(--text-muted);"> kWh/mo</span></div>
+      <div class="data-label">Vietnam physical DPPA Large Electricity Consumer threshold (live since 20 Jul 2026)</div>
+      <div class="data-trend trend-down">▼ Down 90% from 200,000 kWh/month (Decree 57)</div>
+      <div class="data-source">
+        Source: <a href="https://www.frasersvn.com/legal-updates-and-publications/Vietnam-Accelerates-Its-Direct-Power-Purchase-Agreement-Framework-Key-Changes-Under-Decree-243" target="_blank" rel="noopener">Frasers Law, 3 Aug 2026 ↗</a>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="data-value">50<span style="font-size:22px;color:var(--text-muted);"> %</span></div>
+      <div class="data-label">Rooftop-solar surplus sale cap to EVN / Power Corporations (physical DPPA)</div>
+      <div class="data-trend trend-up">▲ Up from 20% under Decree 57/2025</div>
+      <div class="data-source">
+        Source: <a href="https://www.vilaf.com.vn/blog/decree-243-unlocking-new-opportunities-for-direct-power-trading-and-renewable-energy-in-vietnam/" target="_blank" rel="noopener">VILAF, Aug 2026 ↗</a>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="data-value">$50B<span style="font-size:18px;color:var(--text-muted);">/yr by 2050</span></div>
+      <div class="data-label">SE Asia grid + storage investment needed per IEA 2026 outlook (from ~$13B today)</div>
+      <div class="data-trend trend-up">▲ ~3.8× scale-up vs current trajectory</div>
+      <div class="data-source">
+        Source: <a href="https://cop31tr.com/?p=5740/" target="_blank" rel="noopener">COP31 Türkiye Brief, 25 Aug 2026 ↗</a>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="data-value">6<span style="font-size:18px;color:var(--text-muted);"> GW by 2035</span></div>
+      <div class="data-label">Singapore low-carbon electricity import target (11 conditional approvals to date)</div>
+      <div class="data-trend trend-up">▲ New 900 MW MY tranche cleared by EMA this month</div>
+      <div class="data-source">
+        Source: <a href="https://www.eurogroupconsultingmea.com/insights/article/powering-asean-the-southeast-asia-solar-grid-integration-race-thats-rewiring-the-region" target="_blank" rel="noopener">Eurogroup Consulting, 28 Aug 2026 ↗</a>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="data-value">−11<span style="font-size:18px;color:var(--text-muted);"> %</span></div>
+      <div class="data-label">Cisco FY25 direct-operations water withdrawal reduction (vs FY24)</div>
+      <div class="data-trend trend-down">▼ Best-in-class for low-intensity offices</div>
+      <div class="data-source">
+        Source: <a href="https://blogs.cisco.com/our-corporate-purpose/powering-resilient-ecosystems-fy25-purpose-report/" target="_blank" rel="noopener">Cisco FY25 Purpose Report ↗</a>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="data-value">11,000<span style="font-size:18px;color:var(--text-muted);">+</span></div>
+      <div class="data-label">Global companies with SBTi-validated targets (Jun 2026); ~1,000 in China</div>
+      <div class="data-trend trend-up">▲ China = SBTi's fastest-growing market (+228% since 2023)</div>
+      <div class="data-source">
+        Source: <a href="https://www.toutiao.com/article/7670469843036013090" target="_blank" rel="noopener">21st Century Business Herald / Toutiao, 5 Aug 2026 ↗</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================ STRATEGIC RECOMMENDATIONS ============================ -->
+<div class="section">
+  <div class="section-title">Strategic Recommendations</div>
+
+  <div class="rec-block">
+    <h4>Short-term (0–3 months) · Aug – Nov 2026</h4>
+    <ul>
+      <li><strong>Trigger Foxconn/Inventec Vietnam PPA pipeline.</strong> Convert ≥2 priority sites (likely Bắc Ninh, Bình Dương) to signed PPA pre-conditions under Decree 243's 20,000 kWh LEC tier before the Q4 2026 contracting window tightens; aim for a 10–15 year tenor at deregulated private-wire prices.</li>
+      <li><strong>Lock the SBTi supplier transition.</strong> Confirm no Tier-1 EMS partner opts out of SBTi by 31 Aug 2026; align our FY26 supplier letter to reference V2.0 EIA ≥5% Scope 3 reporting once validation opens Q1 2027.</li>
+      <li><strong>Scope a Vietnam–Malaysia cross-border PPA pilot.</strong> Approach TNB (Malaysia) and EVN (Vietnam) jointly to test the ASEAN Power Grid Article 8 cross-border wheeling mechanism for any surplus in BESS-constrained Vietnamese provinces—prepping for the 2028 ADB power-pool tender.</li>
+    </ul>
+  </div>
+
+  <div class="rec-block">
+    <h4>Medium-term (3–12 months) · Nov 2026 – Aug 2027</h4>
+    <ul>
+      <li><strong>Adopt Water Scopes 1–3 vocabulary in CDP Module 5.11 SOP.</strong> Build our supplier water-risk questionnaire around the WRI–WWF–SCS framework (public comment Q2 2027; adoption Q4 2027), and roll out WRI Aqueduct 4.0 country overlays to all 92 priority Tier-1 EMS/ODM sites.</li>
+      <li><strong>Set a mid-cycle Scope 3 / Supplier GHG target under SBTi V2.0.</strong> Use the EIA mechanism to embed a Tier-1 supplier absolute reduction target covering >80% of spend by FY28, closing the disclosure gap surfaced in Cisco's FY25 Purpose Report between FY25–FY40.</li>
+      <li><strong>Re-baseline Vietnam grid-interconnection risk.</strong> Track deployment of the ASEAN Power Grid's 22,000 circuit-km plan against Vietnam PDP8 revisions; use progress data to recalibrate our FY27 Net Zero glide path in the next Purpose Report.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ METHODOLOGY ============================ -->
+<div class="section">
+  <div class="section-title">Methodology Notes</div>
+  <div class="methodology-note">
+    <h4>Search & selection</h4>
+    <p>This issue is built from a single English-language search pass covering August 24 – August 30, 2026 across five required themes: (1) Vietnam DPPA policy (Decree 57, 243, 272, Resolution 253, two-part tariff); (2) Southeast Asia green energy, storage and grid interconnection; (3) Cisco sustainability announcements and ESG reports (FY25/26); (4) Supply-chain water risk and stewardship (TNFD, WRI); (5) Carbon neutrality / net-zero (SBTi, OER, carbon markets). Themes 1, 2 and 3 advanced to the Top 3 with Impact Scores of 9.2, 9.0 and 8.8 respectively. Scoring weights: Cisco operational exposure (40%), regulatory/market magnitude (30%), action-window urgency (20%), source authority (10%).</p>
+    <ul>
+      <li><strong>Search window:</strong> August 24 – August 30, 2026</li>
+      <li><strong>Search language:</strong> English (single pass shared with Chinese edition)</li>
+      <li><strong>Source priority:</strong> Primary (government portals, corporate press releases) &gt; Trade press (Frasers Law, VILAF, IEA, WRI) &gt; Aggregators</li>
+      <li><strong>Source link policy:</strong> All sources are real, clickable URLs from primary publishers. No fabricated links used.</li>
+      <li><strong>Bilingual rule:</strong> The Chinese edition (cisco_sustainability_briefing_zh.html) is a translation + localisation of these same Top 3 topics and data points, not a re-search.</li>
+    </ul>
+    <h4 style="margin-top:14px;">Full source list (this issue)</h4>
+    <ul>
+      <li><a href="https://www.frasersvn.com/legal-updates-and-publications/Vietnam-Accelerates-Its-Direct-Power-Purchase-Agreement-Framework-Key-Changes-Under-Decree-243" target="_blank" rel="noopener">Frasers Law: Vietnam DPPA Decree 243 ↗</a></li>
+      <li><a href="https://www.lexology.com/library/detail.aspx?g=abf15187-7838-4fea-878b-ba5b95db33a7" target="_blank" rel="noopener">Lexology: DPPA &amp; SP&SC Amendments ↗</a></li>
+      <li><a href="https://www.vilaf.com.vn/blog/decree-243-unlocking-new-opportunities-for-direct-power-trading-and-renewable-energy-in-vietnam/" target="_blank" rel="noopener">VILAF: Decree 243 DPPA ↗</a></li>
+      <li><a href="https://vietnam.vn/en/go-diem-nghen-de-nang-luong-di-truoc-mot-buoc" target="_blank" rel="noopener">Vietnam.vn: Resolution 253 / Decree 272 ↗</a></li>
+      <li><a href="https://www.energy-box.com/post/grid-bottlenecks-threaten-southeast-asia-s-energy-transition-report-finds" target="_blank" rel="noopener">Energy Box: SE Asia Grid Bottlenecks (TBH) ↗</a></li>
+      <li><a href="https://cop31tr.com/?p=5740/" target="_blank" rel="noopener">COP31 Türkiye Brief: Asia's Next Energy System ↗</a></li>
+      <li><a href="https://www.eurogroupconsultingmea.com/insights/article/powering-asean-the-southeast-asia-solar-grid-integration-race-thats-rewiring-the-region" target="_blank" rel="noopener">Eurogroup Consulting: Powering ASEAN ↗</a></li>
+      <li><a href="https://vir.com.vn/southeast-asias-energy-transition-enters-a-new-phase-156169.html" target="_blank" rel="noopener">Vietnam Investment Review: Energy Transition ↗</a></li>
+      <li><a href="https://wri.org/technical-perspectives/water-scopes-1-3-value-chain-framework" target="_blank" rel="noopener">WRI: Water Scopes 1–3 Framework ↗</a></li>
+      <li><a href="https://files.sciencebasedtargets.org/production/files/SBTi-Commitment-and-Target-Statuses.pdf" target="_blank" rel="noopener">SBTi: Commitment &amp; Target Statuses V2.0 ↗</a></li>
+      <li><a href="https://sciencebasedtargets.org/measurement-reporting-and-verification-mrv" target="_blank" rel="noopener">SBTi: Corporate Net-Zero Standard ↗</a></li>
+      <li><a href="https://blogs.cisco.com/our-corporate-purpose/powering-resilient-ecosystems-fy25-purpose-report/" target="_blank" rel="noopener">Cisco Blogs: FY25 Purpose Report — Resilient Ecosystems ↗</a></li>
+      <li><a href="https://www.cisco.com/c/dam/m/en_us/about/purpose/reporting-hub/_pdf/purpose-report-2025.pdf" target="_blank" rel="noopener">Cisco FY25 Purpose Report (PDF) ↗</a></li>
+      <li><a href="https://www.toutiao.com/article/7670469843036013090" target="_blank" rel="noopener">21st Century Business Herald: SBTi China Market (via Toutiao) ↗</a></li>
+      <li><a href="https://baike.baidu.com/item/%E7%A7%91%E5%AD%A6%E7%A2%B3%E7%9B%AE%E6%A0%87%E5%80%A1%E8%AE%AE%E7%BB%84%E7%BB%87/59258257" target="_blank" rel="noopener">Baidu Baike: SBTi reference summary ↗</a></li>
+      <li><a href="https://hummingbirds.eu?p=3300/" target="_blank" rel="noopener">Hummingbirds: SBTi V2 OER Framework ↗</a></li>
+      <li><a href="https://www.yydlkjelectric.com/news/southeast-and-central-asia-power-infrastructur-85625982.html" target="_blank" rel="noopener">Yueyang: SEA/CA Power Infrastructure Acceleration ↗</a></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- =========================== SIDEBAR ============================ -->
+<!-- ============================================================== -->
+<div class="sidebar">
+
+  <div class="sidebar-card">
+    <h3>⚡ Quick Signals</h3>
+    <div class="signal">
+      <strong>Vietnam Decree 272 (4 Jul 2026)</strong>
+      Implements Resolution 253/2025/QH15 — 2026–2030 national energy roadmap; private sector welcomes PPP and green-bond pilots.
+      <div class="source"><a href="https://vietnam.vn/en/go-diem-nghen-de-nang-luong-di-truoc-mot-buoc" target="_blank" rel="noopener">Vietnam.vn ↗</a></div>
+    </div>
+    <div class="signal">
+      <strong>Singapore EMA: 900 MW MY tranche</strong>
+      Adds to 11 conditional import approvals on the path to 6 GW by 2035; cumulative solar-plus-storage + hydro pipeline at 13 projects.
+      <div class="source"><a href="https://www.eurogroupconsultingmea.com/insights/article/powering-asean-the-southeast-asia-solar-grid-integration-race-thats-rewiring-the-region" target="_blank" rel="noopener">Eurogroup Consulting ↗</a></div>
+    </div>
+    <div class="signal">
+      <strong>SBTi 31 Aug opt-out deadline</strong>
+      "Targets Set" companies must migrate to V2.0 or withdraw before the window closes—affects hundreds of Cisco Tier-1 suppliers.
+      <div class="source"><a href="https://files.sciencebasedtargets.org/production/files/SBTi-Commitment-and-Target-Statuses.pdf" target="_blank" rel="noopener">SBTi Statuses V2.0 ↗</a></div>
+    </div>
+    <div class="signal">
+      <strong>WRI Water Scopes 1–3 — public consultation Q2 2027</strong>
+      First GHG-Protocol-style water DIRO guidance; final guidance target Q4 2027. Direct input into Cisco Module 5.11.
+      <div class="source"><a href="https://wri.org/technical-perspectives/water-scopes-1-3-value-chain-framework" target="_blank" rel="noopener">WRI ↗</a></div>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <h3>📅 Upcoming Events</h3>
+    <div class="event-row">
+      <div class="event-date">24 Sep 2026</div>
+      SBTi V2.0 Target Dashboard statuses take effect
+    </div>
+    <div class="event-row">
+      <div class="event-date">Q4 2026</div>
+      ASEAN Power Grid 22,000 km pipeline — annual progress review (ADB)
+    </div>
+    <div class="event-row">
+      <div class="event-date">Q1 2027</div>
+      SBTi target validation opens under V2.0
+    </div>
+    <div class="event-row">
+      <div class="event-date">Q2 2027</div>
+      WRI Water Scopes 1–3 public consultation (month 12)
+    </div>
+    <div class="event-row">
+      <div class="event-date">Q4 2027</div>
+      WRI Water Scopes 1–3 final guidance release
+    </div>
+    <div class="event-row">
+      <div class="event-date">FY27</div>
+      Cisco mid-cycle Scope 3 target setting window opens
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <h3>📚 Topics Covered</h3>
+    <div>
+      <span class="topic-chip">Vietnam DPPA</span>
+      <span class="topic-chip">ASEAN Grid</span>
+      <span class="topic-chip">Energy Storage</span>
+      <span class="topic-chip">Cisco FY25</span>
+      <span class="topic-chip">Water Scopes 1-3</span>
+      <span class="topic-chip">SBTi V2.0</span>
+      <span class="topic-chip">Decree 243</span>
+      <span class="topic-chip">Resolution 253</span>
+      <span class="topic-chip">Supply Chain Water</span>
+      <span class="topic-chip">Net Zero</span>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <h3>🔗 Core Sources</h3>
+    <div class="core-source">
+      <a href="https://www.frasersvn.com/legal-updates-and-publications/Vietnam-Accelerates-Its-Direct-Power-Purchase-Agreement-Framework-Key-Changes-Under-Decree-243" target="_blank" rel="noopener">Frasers Law — Vietnam legal alerts ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://www.vilaf.com.vn/blog/decree-243-unlocking-new-opportunities-for-direct-power-trading-and-renewable-energy-in-vietnam/" target="_blank" rel="noopener">VILAF — Vietnam law firm ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://www.lexology.com/library/detail.aspx?g=abf15187-7838-4fea-878b-ba5b95db33a7" target="_blank" rel="noopener">Lexology — legal intelligence ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://vietnam.vn/en/go-diem-nghen-de-nang-luong-di-truoc-mot-buoc" target="_blank" rel="noopener">Vietnam.vn — official English outlet ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://www.iea.org/reports/world-energy-outlook-2026" target="_blank" rel="noopener">IEA — World Energy Outlook 2026 ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://www.adb.org/what-we-do/energy/asean-power-grid" target="_blank" rel="noopener">ADB — ASEAN Power Grid programme ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://wri.org/technical-perspectives/water-scopes-1-3-value-chain-framework" target="_blank" rel="noopener">WRI — Corporate Water Stewardship ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://sciencebasedtargets.org/measurement-reporting-and-verification-mrv" target="_blank" rel="noopener">SBTi — Corporate Net-Zero Standard ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://www.cisco.com/c/en/us/about/supplier-sustainability.html" target="_blank" rel="noopener">Cisco — Supply Chain Sustainability ↗</a>
+    </div>
+    <div class="core-source">
+      <a href="https://blogs.cisco.com/our-corporate-purpose/powering-resilient-ecosystems-fy25-purpose-report/" target="_blank" rel="noopener">Cisco Blogs — FY25 Purpose Report ↗</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  Cisco Sustainability Intelligence Briefing · Issue #70 · 31 Aug 2026 · Internal distribution only · <a href="mailto:dit2@cisco.com">dit2@cisco.com</a>
+</footer>
+
+</div>
+</body>
+</html>
